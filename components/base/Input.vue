@@ -1,16 +1,17 @@
 <script setup lang="ts">
 interface Props {
-  modelValue: string
+  modelValue: string;
+  modelPlaceholder: string;
 }
+
 const props = withDefaults(defineProps<Props>(), {
-  modelValue: ''
-})
+  modelValue: '',
+});
 
-const emit = defineEmits(['update:modelValue'])
-const input = ref<HTMLElement | null>(null)
+const emit = defineEmits(['update:modelValue']);
 
-function updateModalValue (event: Event) {
-  emit('update:modelValue', (event.target as HTMLInputElement).value)
+function updateModelValue(event: Event) {
+  emit('update:modelValue', (event.target as HTMLInputElement).value);
 }
 </script>
 
@@ -18,7 +19,8 @@ function updateModalValue (event: Event) {
   <input
     ref="input"
     class="block w-full max-w-xs mx-auto shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md text-gray-700"
-    :value="props.modelValue"
-    @input="updateModalValue"
+    :value="modelValue"
+    @input="updateModelValue"
+    :placeholder="modelPlaceholder"
   >
 </template>

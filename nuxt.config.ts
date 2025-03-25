@@ -7,23 +7,41 @@ export default defineNuxtConfig({
     'nuxt-icon',
     'nuxt-headlessui',
     'nuxt-vitest',
-    '@nuxt/devtools'
+    '@nuxt/devtools',
+    '@nuxtjs/supabase',
+    'nuxt-typed-router',
+    '@vee-validate/nuxt',
   ],
-  experimental: {
-    reactivityTransform: true
-  },
   css: ['~/assets/css/tailwind.css'],
+
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {}
     }
   },
+  devtools:{enabled:false},
+  runtimeConfig: {
+    public: {
+      supabase: {
+        redirect:false,
+        url: process.env.SUPABASE_URL,
+        key: process.env.SUPABASE_KEY
+      },
+    },
+  },
   colorMode: {
     classSuffix: ''
   },
+
   headlessui: {
     prefix: ''
   },
-  devtools: true
+  vite:{
+    optimizeDeps: {
+      exclude: ['vee-validate']
+    }
+  },
+  // devtools: false,
+  compatibilityDate: '2025-03-16'
 })
